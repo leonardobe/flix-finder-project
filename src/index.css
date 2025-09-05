@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap');
+
+@import "tailwindcss";
+
+body {
+  @apply bg-gray-900;
+}
+
+@theme{
+  --font-poppins: "Poppins", sans-serif;
+  --font-montserrat: "Montserrat", sens-serif;
+  --font-roboto: "Roboto", sens-serif;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1f2937; /* cinza escuro */
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #4b5563; /* cinza médio */
+  border-radius: 9999px;
+  border: 2px solid #1f2937; /* cria efeito de espaço */
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #4b5563 #1f2937;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
