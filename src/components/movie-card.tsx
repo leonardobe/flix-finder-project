@@ -1,25 +1,23 @@
 import { Link } from 'react-router-dom';
+import { Poster } from '../components/placeholder-image';
+import { getImageUrl } from '../services/movie-api';
 import type { Title } from '../types/title';
 
-type MovieCardProps = {
-  movie: Title;
+type TitleCardProps = {
+  title: Title;
 };
 
-export function MovieCard({ movie }: MovieCardProps) {
-  const imageUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : 'https://via.placeholder.com/500x750.png?text=Sem+Imagem';
+export function MovieCard({ title }: TitleCardProps) {
+  const imageUrl = getImageUrl(title.poster_path, 'original')
+  const titleId = title.id;
+  const mediaType = title.media_type || 'movie';
 
   return (
     <div className="transform overflow-hidden rounded-lg bg-gray-800 shadow-lg transition-transform duration-300 hover:scale-105">
-      <Link to={`/movie/${movie.id}`}>
-        {/** biome-ignore lint/performance/noImgElement: <> */}
-        <img
-          alt={movie.title}
-          className="h-auto w-full object-cover"
-          height={32}
+      <Link to={`/${mediaType}/${titleId}`}>
+        <Poster
+          alt={title.title ?? title.name ?? 'Sem título'}
           src={imageUrl}
-          width={32}
         />
       </Link>
     </div>

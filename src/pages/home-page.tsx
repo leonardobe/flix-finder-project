@@ -174,18 +174,24 @@ export function HomePage() {
       </section>
 
       {/* Seções de Agrupamento */}
-      <div className="mt-12 max-w-full space-y-12 px-6 md:px-12">
+      <div className="mt-12 max-w-full px-12">
         {popularMovies && (
-          <MovieRow movies={popularMovies} title="Filmes Populares" />
+          <MovieRow sectionTitle="Filmes Populares" titles={popularMovies} />
         )}
         {popularTvShows && (
-          <MovieRow movies={popularTvShows} title="Séries Populares" />
+          <MovieRow sectionTitle="Séries Populares" titles={popularTvShows} />
         )}
         {topRatedMovies && (
-          <MovieRow movies={topRatedMovies} title="Top 10 Filmes Avaliados" />
+          <MovieRow
+            sectionTitle="Top 10 Filmes Avaliados"
+            titles={topRatedMovies}
+          />
         )}
         {topRatedTvShows && (
-          <MovieRow movies={topRatedTvShows} title="Top 10 Séries Avaliadas" />
+          <MovieRow
+            sectionTitle="Top 10 Séries Avaliadas"
+            titles={topRatedTvShows}
+          />
         )}
       </div>
     </div>

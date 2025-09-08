@@ -11,7 +11,7 @@ export function Header() {
       <div className="flex w-full items-center justify-between px-4">
         {/* Logo */}
         <Link
-          className="font-bold text-2xl text-white uppercase tracking-wide"
+          className="neonText font-bold text-2xl text-white uppercase tracking-wide"
           to="/"
         >
           Flix.Finder
@@ -36,17 +36,17 @@ export function Header() {
 
         {/* Área de itens de menu */}
         <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-5 text-gray-300">
+          <div className="flex items-center gap-7 text-gray-300">
             {navItems.map((item) => {
               return (
                 <NavLink key={item.id} to={item.path}>
                   {({ isActive }) => (
                     <div className="group relative flex flex-col items-center py-2">
                       <span
-                        className={`-bottom-0 absolute h-0.5 w-full rounded-r-full transition-all ${isActive ? 'bg-[#2979FF]' : 'bg-[#2979FF] opacity-0 group-hover:opacity-100'}`}
+                        className={`-bottom-0 absolute h-0.5 w-full transition-all ${isActive ? 'bg-[#2979FF]' : 'bg-[#2979FF] opacity-0 group-hover:opacity-50'}`}
                       />
                       <span
-                        className={`text-xs uppercase md:text-sm ${isActive ? 'text-[#2979FF]' : 'text-white'}`}
+                        className='neonText font-bold text-sm uppercase'
                       >
                         {item.name}
                       </span>

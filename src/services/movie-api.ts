@@ -1,11 +1,8 @@
 import axios from 'axios';
 import { env } from '../env';
-import type {
-  ApiResponse,
-  Title,
-  TitleCreditsResponse,
-  TitleRecommendationsResponse,
-} from '../types/title';
+import type { TitleCreditsResponse } from '../types/credits';
+import type { TitleRecommendationsResponse } from '../types/recommendations';
+import type { ApiResponse, Title } from '../types/title';
 import type { Video } from '../types/video';
 
 const tmdbApi = axios.create({
@@ -16,38 +13,59 @@ const tmdbApi = axios.create({
 });
 
 export function getImageUrl(path: string | null, size: string): string | null {
-  if (!path) {
-    return null;
-  }
-  return `https://image.tmdb.org/t/p/${size}${path}`;
+  return path ? `https://image.tmdb.org/t/p/${size}${path}` : null;
 }
 
 export async function getPopularMovies(): Promise<Title[]> {
-  const response = await tmdbApi.get('/movie/popular', {
-    params: { api_key: env.VITE_TMDB_API_KEY, language: 'pt-BR' },
-  });
-  return response.data.results;
+  const response = await tmdbApi.get<{ results: Omit<Title, 'media_type'>[] }>(
+    '/movie/popular',
+    {
+      params: { api_key: env.VITE_TMDB_API_KEY, language: 'pt-BR' },
+    }
+  );
+  return response.data.results.map((movie) => ({
+    ...movie,
+    media_type: 'movie' as const,
+  }));
 }
 
 export async function getPopularTvShows(): Promise<Title[]> {
-  const response = await tmdbApi.get('/tv/popular', {
-    params: { api_key: env.VITE_TMDB_API_KEY, language: 'pt-BR' },
-  });
-  return response.data.results;
+  const response = await tmdbApi.get<{ results: Omit<Title, 'media_type'>[] }>(
+    '/tv/popular',
+    {
+      params: { api_key: env.VITE_TMDB_API_KEY, language: 'pt-BR' },
+    }
+  );
+  return response.data.results.map((show) => ({
+    ...show,
+    media_type: 'tv' as const,
+  }));
 }
 
 export async function getTopRatedMovies(): Promise<Title[]> {
-  const response = await tmdbApi.get('/movie/top_rated', {
-    params: { api_key: env.VITE_TMDB_API_KEY, language: 'pt-BR' },
-  });
-  return response.data.results;
+  const response = await tmdbApi.get<{ results: Omit<Title, 'media_type'>[] }>(
+    '/movie/top_rated',
+    {
+      params: { api_key: env.VITE_TMDB_API_KEY, language: 'pt-BR' },
+    }
+  );
+  return response.data.results.map((movie) => ({
+    ...movie,
+    media_type: 'movie' as const,
+  }));
 }
 
 export async function getTopRatedTvShows(): Promise<Title[]> {
-  const response = await tmdbApi.get('/tv/top_rated', {
-    params: { api_key: env.VITE_TMDB_API_KEY, language: 'pt-BR' },
-  });
-  return response.data.results;
+  const response = await tmdbApi.get<{ results: Omit<Title, 'media_type'>[] }>(
+    '/tv/top_rated',
+    {
+      params: { api_key: env.VITE_TMDB_API_KEY, language: 'pt-BR' },
+    }
+  );
+  return response.data.results.map((show) => ({
+    ...show,
+    media_type: 'tv' as const,
+  }));
 }
 
 export async function searchTitles(
